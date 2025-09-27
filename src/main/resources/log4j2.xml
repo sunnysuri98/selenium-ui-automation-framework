@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" name="PropertiesConfig">
+
+  <!-- Define properties -->
+  <Properties>
+    <Property name="filename">logs</Property>
+  </Properties>
+
+  <!-- Appenders -->
+  <Appenders>
+
+    <!-- Console Appender -->
+    <Console name="STDOUT" target="SYSTEM_OUT">
+      <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+    </Console>
+
+    <!-- File Appender -->
+    <File name="LOGFILE" fileName="${filename}/mylog.log">
+      <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+    </File>
+
+  </Appenders>
+
+  <!-- Loggers -->
+  <Loggers>
+
+    <!-- Custom logger for mystoreV1 -->
+    <Logger name="mystorev1" level="debug" additivity="false">
+      <AppenderRef ref="LOGFILE" />
+      <AppenderRef ref="STDOUT" />
+    </Logger>
+
+    <!-- Root logger -->
+    <Root level="debug">
+      <AppenderRef ref="STDOUT" />
+    </Root>
+
+  </Loggers>
+
+</Configuration>
