@@ -1,0 +1,46 @@
+name: UI Framework
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: temurin
+          cache: maven
+
+      - name: Run Selenium Tests
+        run: |
+          mvn clean test -DsuiteFile=testng.xml -Dheadless=true -X
+
+      - name: Upload Logs
+        if: always()
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: Logs
+          path: logs/
+
+      - name: Upload Extent Report
+        if: always()
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: ExtentReport
+          path: reports/
