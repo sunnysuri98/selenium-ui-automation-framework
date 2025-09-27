@@ -6,7 +6,9 @@
     </listeners>
     <test name="Test">
         <classes>
+            <class name="com.mystorev1.AccountCreationTest" />
             <class name="com.mystorev1.LoginTest" />
+            <class name="com.mystorev1.PurchaseProductTest" />
         </classes>
     </test>
 </suite>
